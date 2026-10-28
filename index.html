@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한글 글쇠·손가락 기초 연습</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="header-inner">
+      <h1 class="app-title" id="uiAppTitle">한글 글쇠·손가락 기초 연습</h1>
+      <div class="header-controls">
+        <div class="lang-group" id="langGroup"></div>
+        <div class="music-box">
+          <span class="music-label" id="uiMusicLabel">배경 음악</span>
+          <select id="musicSelect" class="music-select"></select>
+          <button type="button" id="btnPlay" class="btn btn-play">▶ 재생</button>
+          <button type="button" id="btnStop" class="btn btn-stop">■ 정지</button>
+          <span id="musicStatus" class="music-status"></span>
+        </div>
+        <button type="button" id="btnFinish" class="btn btn-finish">연습 종료 (TXT 저장)</button>
+        <button type="button" id="btnReset" class="btn">기록 초기화</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="panel">
+      <span class="section-label" id="uiSetSelectTitle">1단계: 연습할 세트를 선택하세요 (총 10세트 · 횟수 제한 없음)</span>
+      <div class="set-grid" id="setGrid"></div>
+      <div class="key-bar">
+        <span class="section-label" id="uiKeySelectTitle" style="margin:0;">2단계: 연습할 목표 글쇠를 직접 선택하세요</span>
+        <div class="key-btn-list" id="keyList"></div>
+      </div>
+    </section>
+
+    <section class="status-grid">
+      <div class="target-card">
+        <div class="target-info">
+          <div class="target-badge">
+            <span class="target-char" id="uiTargetChar">ㄹ</span>
+            <span class="target-phys" id="uiTargetPhys">Key: F</span>
+          </div>
+          <div>
+            <div class="target-set-name" id="uiCurrentSet">1세트: 기본자리 왼손</div>
+            <div class="target-voice" id="uiTargetVoice">ㄹ (리을) — "리을 - 짝!"</div>
+            <span class="target-finger" id="uiTargetFinger">담당 손가락: 왼손 검지</span>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric-box">
+            <span class="metric-label" id="uiLineProgLabel">현재 줄 진행</span>
+            <span class="metric-val" id="uiLineProgVal">0 / 20</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label" id="uiSetErrLabel">세트 누적 오답</span>
+            <span class="metric-val err" id="uiSetErrVal">-0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-head">
+          <span class="guide-title" id="uiGuideTitle">현재 단계 연습 안내</span>
+          <button type="button" id="btnOpenModal" class="btn btn-small">안내 다시 보기</button>
+        </div>
+        <div class="guide-body" id="uiGuideBody"></div>
+        <div class="special-note" id="uiSpecialNote" style="display:none;"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="lines-head">
+        <span class="section-label" id="uiLinesTitle" style="margin:0;">입력 결과 (20회마다 Enter 없이 자동 줄바꿈 · 같은 글쇠 반복)</span>
+        <span class="feedback-msg" id="uiFeedback"></span>
+      </div>
+      <div class="lines-scroll" id="linesBox"></div>
+    </section>
+
+    <section class="panel">
+      <div class="kb-legend">
+        <div class="legend-item"><span class="swatch sw-fj"></span><span id="uiLegFJ">F(ㄹ)·J(ㅓ) 기본 자리 돌기 (고정)</span></div>
+        <div class="legend-item"><span class="swatch sw-target"></span><span id="uiLegTarget">현재 목표 글쇠</span></div>
+        <div class="legend-item"><span class="swatch sw-both"></span><span id="uiLegBoth">F·J가 목표일 때 (동시 표시)</span></div>
+        <div class="legend-item"><span class="swatch sw-shift"></span><span id="uiLegShift">함께 누를 반대쪽 Shift (9·10세트)</span></div>
+      </div>
+      <div class="kb-rows" id="kbContainer"></div>
+    </section>
+  </main>
+
+  <div id="guideModal" class="modal-backdrop">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div class="modal-top">
+        <h2 class="modal-title" id="uiModalTitle">연습 원칙 및 단계 안내 확인</h2>
+        <div class="lang-group" id="modalLangGroup"></div>
+      </div>
+      <div class="modal-stage">
+        <div class="modal-stage-name" id="uiModalStageName"></div>
+        <div class="modal-stage-desc" id="uiModalStageDesc"></div>
+      </div>
+      <ul class="modal-list" id="uiModalPrinciples"></ul>
+      <div class="modal-foot">
+        <button type="button" id="btnConfirmStart" class="btn-start">안내를 확인했습니다 — 연습 시작</button>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    모듈(import) 대신 일반 script를 순서대로 불러온다.
+    → index.html을 더블클릭(file://)해도, GitHub Pages(https://)에서도 똑같이 동작한다.
+  -->
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
