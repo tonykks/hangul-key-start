@@ -57,7 +57,7 @@ function exportTxtFile() {
 
   // 메모장에서도 한글이 깨지지 않도록 UTF-8 BOM을 붙인다
   const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/plain;charset=utf-8' });
-  const fileName = formatFileName(endIso);
+  const fileName = getFilePrefix() + formatFileName(endIso);
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;

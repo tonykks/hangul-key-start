@@ -13,13 +13,18 @@ document.getElementById('btnOpenModal').addEventListener('click', (e) => {
 
 document.getElementById('btnFinish').addEventListener('click', (e) => {
   e.currentTarget.blur();
-  // 연습 종료: TXT 저장 → 이번 연습 기록을 비우고 다음 연습을 새로 시작할 수 있게 한다
+  // 연습 종료: TXT 저장 → (로그인 시) 랭킹 기록 저장 → 이번 연습 기록을 비우고 새로 시작
+  const t = I18N[currentLang];
+  const stats = getSessionStats();
   const fileName = exportTxtFile();
   session = { startTime: null, records: {} };
   saveSession();
   lastFeedback = '';
   renderAll();
-  alert(I18N[currentLang].saved(fileName));
+  saveSessionToCloud(stats).then((result) => {
+    const cloudMsg = { ok: t.cloudOk, pending: t.cloudPending, error: t.cloudError }[result];
+    alert(t.saved(fileName) + (cloudMsg ? '\n' + cloudMsg : ''));
+  });
 });
 
 document.getElementById('btnReset').addEventListener('click', (e) => {
@@ -32,11 +37,17 @@ document.getElementById('btnReset').addEventListener('click', (e) => {
   }
 });
 
-// 로그인: Google 로그인(Firebase) 연동 전까지는 안내만 표시한다
 document.getElementById('btnLogin').addEventListener('click', (e) => {
   e.currentTarget.blur();
-  alert(I18N[currentLang].loginSoon);
+  onLoginButtonClick();
 });
 
+// 랭킹은 새 탭으로 열어 연습 화면과 음악이 끊기지 않게 한다
+document.getElementById('btnRanking').addEventListener('click', (e) => {
+  e.currentTarget.blur();
+  window.open(`ranking.html?lang=${currentLang}`, '_blank');
+});
+
+initFirebase();
 initMusicPlayer();
 renderAll();

@@ -32,6 +32,19 @@ function saveSession() {
   } catch (e) {}
 }
 
+// 이번 연습의 전체 입력 수·정답 수·실제 연습 시간(초)
+function getSessionStats() {
+  let total = 0;
+  let correct = 0;
+  Object.keys(session.records).forEach(k => {
+    session.records[k].forEach(item => {
+      total++;
+      if (item.ok) correct++;
+    });
+  });
+  return { total, correct, activeSec: Math.round((session.activeMs || 0) / 1000) };
+}
+
 function getRecordKey(setId, keyIdx) {
   return `S${setId}_K${keyIdx}`;
 }

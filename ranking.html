@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>연습 시간 랭킹</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="rank-wrap">
+    <div class="rank-head">
+      <h1 class="rank-title" id="uiRankTitle">연습 시간 랭킹 TOP 5</h1>
+      <div class="record-box">
+        <button type="button" id="btnRefresh" class="btn">새로고침</button>
+        <a id="lnkBack" class="btn" href="index.html" style="display:inline-flex;align-items:center;text-decoration:none;">연습 화면으로</a>
+      </div>
+    </div>
+    <p class="rank-sub" id="uiRankSub"></p>
+    <ol class="rank-list" id="rankList"></ol>
+    <p class="rank-msg" id="uiRankMsg"></p>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/ranking.js"></script>
+</body>
+</html>

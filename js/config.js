@@ -7,3 +7,6 @@ const MUSIC_TRACKS = [
   'music/track3.wav',
   'music/track4.wav'
 ];
+
+// 연습 시간 계산: 키 입력 사이 간격이 이 값보다 길면 쉬는 시간으로 보고 이 값까지만 더한다 (랭킹 시간 부풀리기 방지)
+const IDLE_CAP_MS = 30000;

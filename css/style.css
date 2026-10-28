@@ -42,6 +42,34 @@ body {
 .record-box { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .btn-login { border-color: var(--primary); color: var(--primary); min-width: 72px; }
 .btn-login:hover { background: #eff6ff; }
+.btn-login.logged-in { background: #eff6ff; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.btn-ranking { border-color: #f59e0b; color: #b45309; }
+.btn-ranking:hover { background: #fffbeb; }
+
+/* 랭킹 화면 (ranking.html) */
+.rank-wrap { max-width: 640px; width: 100%; margin: 24px auto; padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+.rank-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rank-title { font-size: 1.25rem; font-weight: 900; }
+.rank-sub { font-size: 0.82rem; color: var(--sub); }
+.rank-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.rank-row {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 10px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px;
+}
+.rank-no { font-size: 1.1rem; font-weight: 900; color: var(--sub); text-align: center; }
+.rank-row:nth-child(1) .rank-no { color: #d97706; }
+.rank-row:nth-child(2) .rank-no { color: #64748b; }
+.rank-row:nth-child(3) .rank-no { color: #b45309; }
+.rank-nick {
+  justify-self: start; border: none; background: none; padding: 0; cursor: pointer;
+  font-size: 1rem; font-weight: 800; color: var(--primary); text-decoration: underline; text-underline-offset: 3px;
+}
+.rank-time { font-size: 0.95rem; font-weight: 800; }
+.rank-detail { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.rank-detail div { background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; }
+.rank-detail span { display: block; font-size: 0.72rem; font-weight: 700; color: var(--sub); }
+.rank-detail b { font-size: 0.98rem; }
+.rank-msg { font-size: 0.9rem; color: var(--sub); padding: 12px 0; }
 
 /* 언어 버튼: 같은 크기의 독립 버튼 3개 */
 .lang-group { display: grid; grid-template-columns: repeat(3, 86px); gap: 4px; }

@@ -225,7 +225,7 @@ function renderAll() {
   document.getElementById('btnStop').textContent = t.stop;
   document.getElementById('btnFinish').textContent = t.finish;
   document.getElementById('btnReset').textContent = t.reset;
-  document.getElementById('btnLogin').textContent = t.login;
+  document.getElementById('btnRanking').textContent = t.ranking;
   document.getElementById('uiSetSelectTitle').textContent = t.step1;
   document.getElementById('uiKeySelectTitle').textContent = t.step2;
   document.getElementById('uiLineProgLabel').textContent = t.prog;
@@ -239,6 +239,7 @@ function renderAll() {
   document.getElementById('uiLegShift').textContent = t.legS;
 
   setMusicStatus(musicStatusKey, musicStatusWarn);
+  renderLoginButton();
   renderLanguageButtons();
   renderSelectors();
   renderTargetAndGuide();

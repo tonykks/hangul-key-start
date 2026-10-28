@@ -153,6 +153,13 @@ window.addEventListener('keydown', (e) => {
 
   const inputs = getKeyInputs(curSet.id, currentKeyIdx);
   inputs.push({ char: recordedChar, ok: isCorrect });
+
+  // 실제 연습 시간 누적 (쉬는 시간은 IDLE_CAP_MS까지만 인정)
+  const now = Date.now();
+  if (session.lastKeyAt) {
+    session.activeMs = (session.activeMs || 0) + Math.min(now - session.lastKeyAt, IDLE_CAP_MS);
+  }
+  session.lastKeyAt = now;
   saveSession();
 
   renderSelectors();

@@ -1,0 +1,41 @@
+rules_version = '2';
+
+// 한글 글쇠 연습 — Firestore 보안 규칙
+// users/{uid} : { nickname, totalSec, sessions, scoreSum, updatedAt }
+// - 랭킹을 위해 누구나 읽을 수 있다 (이메일 등 개인정보는 저장하지 않음)
+// - 로그인한 본인만 자기 문서를 만들거나 고칠 수 있다
+// - 연습 1회 저장 시 횟수는 정확히 1 증가, 시간은 최대 4시간, 점수는 최대 100까지만 늘어난다
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function validDoc() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['nickname', 'totalSec', 'sessions', 'scoreSum', 'updatedAt'])
+        && d.nickname is string && d.nickname.size() >= 1 && d.nickname.size() <= 12
+        && d.totalSec is number && d.sessions is int && d.scoreSum is number;
+    }
+
+    function nicknameOnly() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['nickname', 'updatedAt']);
+    }
+
+    function oneSession() {
+      let d = request.resource.data;
+      let o = resource.data;
+      return d.sessions == o.sessions + 1
+        && d.totalSec >= o.totalSec && d.totalSec <= o.totalSec + 14400
+        && d.scoreSum >= o.scoreSum && d.scoreSum <= o.scoreSum + 100
+        && d.nickname == o.nickname;
+    }
+
+    match /users/{uid} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == uid && validDoc()
+        && request.resource.data.sessions == 0
+        && request.resource.data.totalSec == 0
+        && request.resource.data.scoreSum == 0;
+      allow update: if request.auth != null && request.auth.uid == uid && validDoc()
+        && (nicknameOnly() || oneSession());
+    }
+  }
+}
