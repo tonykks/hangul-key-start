@@ -32,5 +32,11 @@ document.getElementById('btnReset').addEventListener('click', (e) => {
   }
 });
 
+// 로그인: Google 로그인(Firebase) 연동 전까지는 안내만 표시한다
+document.getElementById('btnLogin').addEventListener('click', (e) => {
+  e.currentTarget.blur();
+  alert(I18N[currentLang].loginSoon);
+});
+
 initMusicPlayer();
 renderAll();
