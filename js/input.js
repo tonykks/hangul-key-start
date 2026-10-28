@@ -37,32 +37,43 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden) resetAllKeyStates();
 });
 
+// 왼쪽/오른쪽 Shift 판별: e.code가 비거나 다르게 오는 환경(한글 입력기·일부 키보드)을 대비해
+// 키 위치(e.location: 1=왼쪽, 2=오른쪽)로 한 번 더 확인한다
+function getShiftSide(e) {
+  if (e.code === 'ShiftRight' || e.code === 'ShiftLeft') return e.code;
+  if (e.key === 'Shift' || e.keyCode === 16) return e.location === 2 ? 'ShiftRight' : 'ShiftLeft';
+  return '';
+}
+
 window.addEventListener('keyup', (e) => {
-  const code = e.code || CHAR_TO_CODE[e.key] || '';
+  const shiftSide = getShiftSide(e);
+  const code = shiftSide || e.code || CHAR_TO_CODE[e.key] || '';
   if (code) pressedCodes.delete(code);
 
-  if (e.code === 'ShiftRight') isRightShiftDown = false;
-  if (e.code === 'ShiftLeft') isLeftShiftDown = false;
-  if (e.key === 'Shift' && !e.shiftKey) {
+  if (shiftSide === 'ShiftRight') isRightShiftDown = false;
+  if (shiftSide === 'ShiftLeft') isLeftShiftDown = false;
+  if (shiftSide && !e.shiftKey) {
     isLeftShiftDown = false;
     isRightShiftDown = false;
+    setKeyVisualPressed('ShiftLeft', false);
+    setKeyVisualPressed('ShiftRight', false);
   }
   if (code) setKeyVisualPressed(code, false);
 });
 
 window.addEventListener('keydown', (e) => {
-  // 1. Shift 상태 추적 (e.code === 'ShiftRight' / 'ShiftLeft')
-  if (e.code === 'ShiftRight') {
+  // 1. Shift 상태 추적 (왼쪽/오른쪽 구분)
+  const shiftSide = getShiftSide(e);
+  if (shiftSide === 'ShiftRight') {
     isRightShiftDown = true;
     setKeyVisualPressed('ShiftRight', true);
     return;
   }
-  if (e.code === 'ShiftLeft') {
+  if (shiftSide === 'ShiftLeft') {
     isLeftShiftDown = true;
     setKeyVisualPressed('ShiftLeft', true);
     return;
   }
-  if (e.key === 'Shift') return;
 
   // Ctrl, Alt, OS 단축키는 연습 입력으로 처리하지 않고 통과
   if (e.ctrlKey || e.altKey || e.metaKey) return;
