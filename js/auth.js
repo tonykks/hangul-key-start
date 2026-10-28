@@ -74,9 +74,13 @@ function askNickname() {
 function renderLoginButton() {
   const t = I18N[currentLang];
   const btn = document.getElementById('btnLogin');
+  const chip = document.getElementById('uiNickname');
   const isIn = Boolean(currentUser && currentNickname);
-  btn.textContent = isIn ? `👤 ${currentNickname}` : t.login;
-  btn.title = isIn ? t.logoutHint : '';
+  // 로그인 중: [👤 별칭] 표시 + [로그아웃] 버튼 / 로그아웃 상태: [로그인] 버튼만
+  chip.hidden = !isIn;
+  chip.textContent = isIn ? `👤 ${currentNickname}` : '';
+  chip.title = isIn ? currentNickname : '';
+  btn.textContent = isIn ? t.logout : t.login;
   btn.classList.toggle('logged-in', isIn);
 }
 
@@ -87,7 +91,7 @@ async function onLoginButtonClick() {
     return;
   }
   if (currentUser) {
-    if (confirm(t.logoutAsk(currentNickname))) await fbAuth.signOut();
+    await fbAuth.signOut();
     return;
   }
   const provider = new firebase.auth.GoogleAuthProvider();

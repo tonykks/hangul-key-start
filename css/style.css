@@ -42,7 +42,14 @@ body {
 .record-box { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .btn-login { border-color: var(--primary); color: var(--primary); min-width: 72px; }
 .btn-login:hover { background: #eff6ff; }
-.btn-login.logged-in { background: #eff6ff; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.btn-login.logged-in { border-color: var(--border); color: var(--sub); }
+.btn-login.logged-in:hover { background: #f1f5f9; }
+.nick-chip {
+  max-width: 140px; height: 28px; padding: 0 10px; display: inline-flex; align-items: center;
+  background: #eff6ff; border-radius: 99px; font-size: 0.8rem; font-weight: 800; color: #1d4ed8;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.nick-chip[hidden] { display: none; }
 .btn-ranking { border-color: #f59e0b; color: #b45309; }
 .btn-ranking:hover { background: #fffbeb; }
 
