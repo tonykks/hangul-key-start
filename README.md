@@ -33,8 +33,8 @@
 
 ## 음악 추가 방법
 
-1. 음악 파일(WAV)을 `music/` 폴더에 넣습니다.
-2. `js/config.js`의 `MUSIC_TRACKS` 목록에 `'music/파일이름.wav'` 한 줄을 추가합니다.
+1. 음악 파일(MP3 권장, WAV는 용량이 10배 큼)을 `music/` 폴더에 넣습니다.
+2. `js/config.js`의 `MUSIC_TRACKS` 목록에 `'music/파일이름.mp3'` 한 줄을 추가합니다.
 
 ## 연습 종료
 

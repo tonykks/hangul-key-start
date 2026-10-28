@@ -3,3 +3,6 @@
 
 # 기능별 분리 전 원본 단일 파일 (로컬 보관용)
 hangul-key.html
+
+# 원본 WAV 음악 (용량이 커서 저장소에는 MP3만 올림)
+music/wav-original/
