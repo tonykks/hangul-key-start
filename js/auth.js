@@ -78,8 +78,10 @@ function renderLoginButton() {
   const isIn = Boolean(currentUser && currentNickname);
   // 로그인 중: [👤 별칭] 표시 + [로그아웃] 버튼 / 로그아웃 상태: [로그인] 버튼만
   chip.hidden = !isIn;
-  chip.textContent = isIn ? `👤 ${currentNickname}` : '';
-  chip.title = isIn ? currentNickname : '';
+  // 같은 별칭을 구분하도록 계정 번호 뒷자리 4자를 괄호로 붙인다 (랭킹 화면과 같은 표기)
+  const label = isIn ? `${currentNickname} (${currentUser.uid.slice(-4)})` : '';
+  chip.textContent = isIn ? `👤 ${label}` : '';
+  chip.title = label;
   btn.textContent = isIn ? t.logout : t.login;
   btn.classList.toggle('logged-in', isIn);
 }

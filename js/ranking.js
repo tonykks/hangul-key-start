@@ -51,7 +51,8 @@ async function loadRanking() {
   setMsg(t.rankLoading);
   try {
     const snap = await rankDb.collection('users').orderBy('totalSec', 'desc').limit(RANK_LIMIT + HIDDEN_UIDS.size).get();
-    const docs = snap.docs.filter(doc => !HIDDEN_UIDS.has(doc.id)).map(doc => doc.data())
+    // 같은 별칭을 구분하도록 계정 번호(문서 id) 뒷자리 4자를 함께 둔다
+    const docs = snap.docs.filter(doc => !HIDDEN_UIDS.has(doc.id)).map(doc => ({ ...doc.data(), tag: doc.id.slice(-4) }))
       .filter(d => (d.sessions || 0) > 0).slice(0, RANK_LIMIT);
     setMsg(docs.length ? '' : t.rankEmpty);
     docs.forEach((d, idx) => {
@@ -66,7 +67,7 @@ async function loadRanking() {
       const nick = document.createElement('button');
       nick.type = 'button';
       nick.className = 'rank-nick';
-      nick.textContent = d.nickname;
+      nick.textContent = `${d.nickname} (${d.tag})`;
 
       const time = document.createElement('span');
       time.className = 'rank-time';
