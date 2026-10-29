@@ -56,6 +56,8 @@ const I18N = {
       10: ['10세트: Shift＋오른손 윗자리', '반대쪽 【왼쪽 Shift】를 누른 상태에서 목표 글쇠를 치고, 다음 박자("짝")에 모두 놓고 돌아옵니다. (ㅛ·ㅕ·ㅑ도 왼쪽 Shift 필수)']
     },
     noteB: '【ㅠ(B) 예외 안내】 모음 ㅠ(B)는 자판 배치상 한컴타자와 같이 【왼손 검지】로 입력합니다.',
+    shiftNoteModal: '※ 컴퓨터에 따라 오른쪽 Shift를 눌러도 화면 키보드에서는 왼쪽 Shift가 눌린 것처럼 보일 수 있습니다. 정답 판정에는 문제가 없으니 안심하고 연습해 주세요.',
+    shiftNoteKey: '화면에 Left Shift로 보여도 정상입니다',
     noteS9: '【Shift 원칙】 오른쪽 Shift를 누른 채 목표 키를 입력하고, 다음 박자에 모두 놓아 기본 자리로 복귀하세요.',
     noteS10: '【Shift 원칙】 왼쪽 Shift를 누른 채 목표 키를 입력하고, 다음 박자에 모두 놓아 복귀하세요. (ㅛ·ㅕ·ㅑ도 Shift 필수)',
     errNoSR: '오답 원인: 오른쪽 Shift를 누른 채 입력해야 합니다.',
@@ -118,6 +120,8 @@ const I18N = {
       10: ['အတွဲ ၁၀ - Shift + ညာ အပေါ်တန်း', 'ဆန့်ကျင်ဘက် 【ဘယ် Shift】ကိုဖိထားရင်း ခလုတ်နှိပ်ပြီး နောက်တစ်ချက်တွင် လွှတ်ကာ ပြန်လာပါ။ (ㅛ·ㅕ·ㅑ လည်း ဘယ် Shift လိုသည်)']
     },
     noteB: '【ㅠ(B) ခြွင်းချက်】 ကီးဘုတ်အနေအထားကြောင့် "ㅠ(B)" သရကို 【ဘယ် လက်ညှိုး】ဖြင့် ရိုက်ရပါသည်။',
+    shiftNoteModal: '※ ကွန်ပျူတာအချို့တွင် ညာ Shift ကို နှိပ်သော်လည်း မျက်နှာပြင် ကီးဘုတ်တွင် ဘယ် Shift နှိပ်ထားသကဲ့သို့ ပြနိုင်ပါသည်။ အမှန်/အမှား စစ်ဆေးမှုတွင် ပြဿနာ မရှိပါ၍ စိတ်ချစွာ လေ့ကျင့်နိုင်ပါသည်။',
+    shiftNoteKey: 'Left Shift ဟု ပြနေလည်း ပုံမှန်ဖြစ်ပါသည်',
     noteS9: '【Shift စည်းမျဉ်း】 ညာ Shift ကိုဖိ၍ ခလုတ်နှိပ်ပြီး နောက်တစ်ချက်တွင် နှစ်ခုလုံးလွှတ်ကာ အခြေခံနေရာသို့ ပြန်လာပါ။',
     noteS10: '【Shift စည်းမျဉ်း】 ဘယ် Shift ကိုဖိ၍ ခလုတ်နှိပ်ပြီး နောက်တစ်ချက်တွင် နှစ်ခုလုံးလွှတ်ကာ ပြန်လာပါ။',
     errNoSR: 'အမှား - ညာဘက် Shift ကို ဖိထားရင်း ရိုက်ရပါမည်။',
@@ -180,6 +184,8 @@ const I18N = {
       10: ['Bộ 10: Shift + Hàng trên phải', 'Giữ 【Shift Trái】, nhấn phím mục tiêu, rồi thả cả hai để về hàng cơ bản. (ㅛ·ㅕ·ㅑ cũng bắt buộc giữ Shift Trái)']
     },
     noteB: '【Ngoại lệ ㅠ(B)】 Nguyên âm "ㅠ(B)" được gõ bằng 【Ngón trỏ trái】 giống như Hancom Typing.',
+    shiftNoteModal: '※ Tùy máy tính, khi bấm Shift Phải, bàn phím trên màn hình có thể hiển thị như đang bấm Shift Trái. Việc chấm đúng/sai không bị ảnh hưởng, các bạn cứ yên tâm luyện tập.',
+    shiftNoteKey: 'Hiển thị Left Shift vẫn là bình thường',
     noteS9: '【Nguyên tắc Shift】 Giữ Shift Phải khi gõ phím mục tiêu, nhịp tiếp theo thả cả hai và về hàng cơ bản.',
     noteS10: '【Nguyên tắc Shift】 Giữ Shift Trái khi gõ phím mục tiêu, nhịp tiếp theo thả cả hai. (ㅛ·ㅕ·ㅑ bắt buộc giữ Shift Trái)',
     errNoSR: 'Lỗi: Phải giữ Shift Phải khi nhấn phím mục tiêu.',

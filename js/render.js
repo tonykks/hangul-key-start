@@ -177,6 +177,13 @@ function renderKeyboard() {
         kDiv.classList.add('kb-shift');
         kDiv.textContent = code === 'ShiftLeft' ? 'Left Shift' : 'Right Shift';
         if (curKey.reqShift === code) kDiv.classList.add('shift-req');
+        // 9세트: Right Shift 옆에 "Left Shift로 보여도 정상" 안내
+        if (curSet.id === 9 && code === 'ShiftRight') {
+          const note = document.createElement('div');
+          note.className = 'shift-side-note';
+          note.textContent = I18N[currentLang].shiftNoteKey;
+          kDiv.appendChild(note);
+        }
       } else {
         const def = KEY_MAP[code];
         const topShift = (def.s !== def.n) ? def.s : '';
@@ -215,6 +222,13 @@ function renderModalContent() {
     li.textContent = p;
     ul.appendChild(li);
   });
+  // 9세트: 컴퓨터에 따라 오른쪽 Shift가 화면에서 왼쪽으로 보일 수 있음을 미리 알린다
+  if (curSet.id === 9) {
+    const li = document.createElement('li');
+    li.className = 'shift-note';
+    li.textContent = t.shiftNoteModal;
+    ul.appendChild(li);
+  }
 }
 
 function renderAll() {

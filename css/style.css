@@ -223,6 +223,12 @@ body {
 }
 .kb-key.shift-req { background: var(--shift-bg); border: 2px dashed var(--shift-border); color: #312e81; }
 .kb-key.pressed { transform: translateY(4px); box-shadow: 0 0 0 transparent !important; filter: brightness(0.95); }
+/* 9세트 Right Shift 옆 안내 (키 오른쪽 빈 곳에 작게) */
+.shift-side-note {
+  position: absolute; left: calc(100% + 10px); top: 50%; transform: translateY(-50%);
+  width: 170px; font-size: 0.7rem; font-weight: 700; line-height: 1.3; color: var(--shift-border);
+}
+.modal-list li.shift-note { list-style: none; margin-left: -16px; color: var(--shift-border); }
 
 /* 단계 진입 안내 모달 */
 .modal-backdrop {
