@@ -6,3 +6,6 @@ hangul-key.html
 
 # 원본 WAV 음악 (용량이 커서 저장소에는 MP3만 올림)
 music/wav-original/
+
+# 요구사항 문서 (로컬 보관, 공개하지 않음)
+project-intent.md
