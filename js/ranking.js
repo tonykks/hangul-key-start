@@ -3,6 +3,8 @@
 // - 문서 5개만 읽으므로 40명이 동시에 열어도 부담이 없다
 // ============================================================================
 const RANK_LIMIT = 5;
+// 랭킹에 보이지 않게 할 계정(강사 시험용). 기록은 Firestore에 그대로 남는다
+const HIDDEN_UIDS = new Set(['4415TvZiloOVSiJryLHTjTr4Jfp1']);
 const params = new URLSearchParams(location.search);
 const lang = I18N[params.get('lang')] ? params.get('lang') : 'ko';
 const t = I18N[lang];
@@ -48,8 +50,9 @@ async function loadRanking() {
   }
   setMsg(t.rankLoading);
   try {
-    const snap = await rankDb.collection('users').orderBy('totalSec', 'desc').limit(RANK_LIMIT).get();
-    const docs = snap.docs.map(doc => doc.data()).filter(d => (d.sessions || 0) > 0);
+    const snap = await rankDb.collection('users').orderBy('totalSec', 'desc').limit(RANK_LIMIT + HIDDEN_UIDS.size).get();
+    const docs = snap.docs.filter(doc => !HIDDEN_UIDS.has(doc.id)).map(doc => doc.data())
+      .filter(d => (d.sessions || 0) > 0).slice(0, RANK_LIMIT);
     setMsg(docs.length ? '' : t.rankEmpty);
     docs.forEach((d, idx) => {
       const li = document.createElement('li');
