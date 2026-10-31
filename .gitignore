@@ -9,3 +9,6 @@ music/wav-original/
 
 # 요구사항 문서 (로컬 보관, 공개하지 않음)
 project-intent.md
+
+# Codex 비교 실험용 프롬프트 (로컬 보관, 공개하지 않음)
+codex-prompts.md
